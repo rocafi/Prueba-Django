@@ -1,0 +1,36 @@
+# * Nombre de la tarea
+name: Testing
+
+# * en que accion se realiza
+on:
+  push:
+    branches:
+      - main
+
+# * tareas a ejecutar
+jobs:
+  test-project:
+    runs-on: windows-latest
+  # * pasos de la tarea
+    steps:
+      # * revisando el repositorio
+      - name: Checlout repository
+      uses: action/checkout@v2
+      
+      # * instalar python
+      - name: Set up python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+      # * instalar las dependecias
+      - name: Install dependencies
+      run: /
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+      # * ejecutar las pruebas
+      -name: Run Django unit tests
+      run: /
+        python manage.py test
+
